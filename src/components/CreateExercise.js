@@ -1,11 +1,21 @@
 import React from 'react';
 
-const CreateExercise = () => {
+class CreateExercise extends React.Component {
 
-    return(
-        <h2>CreateExercise</h2>
-    )
-    
+    //This fields should be equal to the fields in our MongoDB
+    state = {
+        usernam: '',
+        description: '',
+        series: 0,
+        date: new Date(),
+        users: []
+    }
+
+    render() {
+        return(
+            <h2>CreateExercise</h2>
+        )
+    }
 };
 
 export default CreateExercise;
