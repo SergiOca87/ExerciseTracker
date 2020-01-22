@@ -65,7 +65,7 @@ class CreateExercise extends React.Component {
 				<h3>Add a New Exercise</h3>
 				<form onSubmit ={this.onFormSubmit}>
 					<div className="form-group">
-						<label for="userSelect">User</label>
+						<label>User</label>
 						<select 
 							id="userSelect"
 							value={this.state.userName}
@@ -78,7 +78,7 @@ class CreateExercise extends React.Component {
 						</select>
 					</div>
 					<div className="form-group">
-						<label for="description">Description</label>
+						<label>Description</label>
 						<input 
 							type="text"
 							className="form-control"
@@ -87,7 +87,7 @@ class CreateExercise extends React.Component {
 							onChange={this.onChangeDescription} />
 					</div>
 					<div className="form-group">
-						<label for="series"># of Series</label>
+						<label># of Series</label>
 						<input 
 							type="number"
 							className="form-control"
@@ -96,7 +96,7 @@ class CreateExercise extends React.Component {
 							onChange={this.onChangeSeries} />
 					</div>
 					<div className="form-group">
-						<label for="date">Date</label>
+						<label>Date</label>
 						<DatePicker
 							selected={this.state.date}
 							onChange={this.onChangeDate}

@@ -24,8 +24,10 @@ class CreateUser extends React.Component {
         }
 
         //Send the user data to our server
-        axios.post('http:localhost:5000/users/add', user)
-            .then(res => console.log(res.data))
+        axios.post('http://localhost:5000/users/add', user)
+            .then(res => console.log(res.data));
+
+            // window.location = 'http://localhost:3000/'
 
         //Clear the username Field
         this.setState({
@@ -39,7 +41,7 @@ class CreateUser extends React.Component {
                 <h3>Create a New User</h3>
                 <form onSubmit ={this.onFormSubmit}>
                     <div className="form-group">
-                        <label for="description">Description</label>
+                        <label>Add a new User</label>
                         <input 
                             type="text"
                             className="form-control"
