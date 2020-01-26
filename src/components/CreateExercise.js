@@ -10,7 +10,8 @@ class CreateExercise extends React.Component {
     state = {
         username: '',
         description: '',
-        series: 0,
+		series: 0,
+		weight: 0,
         date: new Date(),
         users: []
     }
@@ -18,20 +19,18 @@ class CreateExercise extends React.Component {
     //This data will come from the DB
     componentDidMount = () => {
 
-		let usersArr = [];
-
 		axios.get('http://localhost:5000/users/')
 			.then((res) => {
 				console.log(res.data);
-				res.data.map((user) => usersArr.push(user.username));
 
 				this.setState({
-					users: [...usersArr],
-					username: usersArr[0]
+					users: res.data.map( user  => user.username ),
+					username: res.data[0].username
 				})
+			
 			})
 			.catch((err) => console.log(err));
-    };
+	}
 
     onChangeUsername = (e) => {
         this.setState({
@@ -50,6 +49,12 @@ class CreateExercise extends React.Component {
             series: e.target.value,
         });
 	};
+
+	onChangeWeight = (e) => {
+        this.setState({
+            weight: e.target.value,
+        });
+	};
 	
 	onChangeDate = (date) => {
         this.setState({
@@ -65,6 +70,7 @@ class CreateExercise extends React.Component {
             username: this.state.username,
 			description: this.state.description,
 			series: this.state.series,
+			weight: this.state.weight,
 			date: this.state.date,
 			users: this.state.users,
 		}
@@ -109,6 +115,15 @@ class CreateExercise extends React.Component {
 							id="series"
 							value={this.state.series}
 							onChange={this.onChangeSeries} />
+					</div>
+					<div className="form-group">
+						<label>Weight in kgs</label>
+						<input 
+							type="number"
+							className="form-control"
+							id="weight"
+							value={this.state.weight}
+							onChange={this.onChangeWeight} />
 					</div>
 					<div className="form-group">
 						<label>Date</label>
