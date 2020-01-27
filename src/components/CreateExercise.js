@@ -23,11 +23,14 @@ class CreateExercise extends React.Component {
 			.then((res) => {
 				console.log(res.data);
 
-				this.setState({
-					users: res.data.map( user  => user.username ),
-					username: res.data[0].username
-				})
-			
+				// first check if there is a response at all
+				// If there is at least 1 user in the DB
+				if(res.data.length > 0) { 
+					this.setState({
+						users: res.data.map( user  => user.username ),
+						username: res.data[0].username
+					})
+				}
 			})
 			.catch((err) => console.log(err));
 	}
@@ -76,7 +79,9 @@ class CreateExercise extends React.Component {
 		}
 		
 		axios.post('http://localhost:5000/exercises/add/', exercise)
-			.then((res) => console.log(res))	
+			.then((res) => {
+				window.location = 'http://localhost:3000/';
+			})	
 			.catch((err) => console.log(err));
    	 	}
 
@@ -84,7 +89,7 @@ class CreateExercise extends React.Component {
         return(
 			<Layout>
 				<h3>Add a New Exercise</h3>
-				<form onSubmit ={this.onFormSubmit}>
+				<form onSubmit={this.onFormSubmit}>
 					<div className="form-group">
 						<label>User</label>
 						<select 
