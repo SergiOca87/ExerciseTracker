@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Layout from './Layout';
 
+import './ExercisesList.css';
+
 const Exercise = (props) => {
     return(
         <div className="col col-md-6 col-sm-12">
@@ -17,8 +19,8 @@ const Exercise = (props) => {
                     </ul>
                 </div>
                 <div className="card-footer text-light">
+                    <Link to={"/update/" + props.id} className="btn btn-primary">Edit Exercise</Link>
                     <a onClick={() => props.deleteExercise(props.id)} className="btn btn-danger">Delete Exercise</a>
-    
                 </div>
             </div>
         </div>
@@ -80,6 +82,9 @@ class ExercicesList extends React.Component {
                 <h2>ExercisesList</h2>
                     <div className="row">
                         {this.renderExercises()}
+                    </div>
+                    <div className="motivational-gif">
+                        <iframe src="https://giphy.com/embed/xT9DPnxOqFNu0vObyU" width="100%" height="480" frameBorder="0"></iframe>
                     </div>
             </Layout>
         )
