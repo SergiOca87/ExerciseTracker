@@ -4,7 +4,7 @@ import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import Layout from './Layout';
 
-class CreateExercise extends React.Component {
+class EditExercise extends React.Component {
 
     //This fields should be equal to the fields in our MongoDB
     state = {
@@ -18,6 +18,19 @@ class CreateExercise extends React.Component {
 
     //This data will come from the DB
     componentDidMount = () => {
+
+		//Getting the id from the URL
+		axios.get('http://localhost:5000/exercises/' + this.props.match.params.id)
+			.then(res => {
+				this.setState({
+					username: res.data.username,
+					description: res.data.description,
+					series: res.data.series,
+					weight: res.data.weight,
+					date: new Date(res.data.date)
+				})
+			})
+			.catch( err => console.log(err));
 
 		axios.get('http://localhost:5000/users/')
 			.then((res) => {
@@ -78,7 +91,8 @@ class CreateExercise extends React.Component {
 			users: this.state.users,
 		}
 		
-		axios.post('http://localhost:5000/exercises/add/', exercise)
+		//We also pass the id through the URL params
+		axios.post('http://localhost:5000/update/' + this.props.match.params.id, exercise)
 			.then((res) => {
 				window.location = 'http://localhost:3000/';
 			})	
@@ -88,7 +102,7 @@ class CreateExercise extends React.Component {
     render() {
         return(
 			<Layout>
-				<h3>Add a New Exercise</h3>
+				<h3>Edit Exercise</h3>
 				<form onSubmit={this.onFormSubmit}>
 					<div className="form-group">
 						<label>User</label>
@@ -137,11 +151,11 @@ class CreateExercise extends React.Component {
 							onChange={this.onChangeDate}
 						/>
 					</div>
-					<button type="submit" className="btn btn-primary">Submit</button>
+					<button type="submit" className="btn btn-primary">Edit</button>
 				</form>
 			 </Layout>
         )
     }
 };
 
-export default CreateExercise;
+export default EditExercise;
